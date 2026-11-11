@@ -67,8 +67,7 @@ jobs:
           name: ep6-audio
           path: audio.wav
           retention-days: 3
-
-  merge:
+    merge:
     name: Merge & Publish MP4
     needs: [render-chunks, render-audio]
     runs-on: ubuntu-latest
@@ -78,6 +77,8 @@ jobs:
           path: artifacts
       - name: Concat 16 video chunks + mux audio
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
           rm -f concat.txt
           for i in $(seq 0 15); do
             echo "file 'artifacts/chunk-${i}/chunk-${i}.mp4'" >> concat.txt
@@ -93,4 +94,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ep6-render SudutGanjilEp6.mp4 --title "Sudut Ganjil Episode 6" --notes "Rendered 1920x1080 30fps via 16 parallel GitHub Actions workers" || gh release upload ep6-render SudutGanjilEp6.mp4 --clobber
+          gh release create ep6-render SudutGanjilEp6.mp4 --repo ${{ github.repository }} --title "Sudut Ganjil Episode 6" --notes "Rendered 1920x1080 30fps via 16 parallel GitHub Actions workers" || gh release upload ep6-render SudutGanjilEp6.mp4 --repo ${{ github.repository }} --clobber
