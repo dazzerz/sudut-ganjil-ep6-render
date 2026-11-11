@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lightspark Capabilities 20s</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: #020202;
+      color: #f8f8f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    #stage {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: #000000;
+    }
+    /* Technical Grid Lines */
+    .grid-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+      pointer-events: none;
+      opacity: 0.07;
+      background-size: 72px 72px;
+      background-image: 
+        linear-gradient(to right, #ffffff 1px, transparent 1px),
+        linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+    }
+    /* Safe Area: 1080 x 1920 (Top: 140px, Bottom: 220px, Left/Right: 70px) */
+    .safe-frame {
+      position: absolute;
+      top: 140px;
+      left: 70px;
+      width: 940px;
+      height: 1560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    /* Header Bar */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 64px;
+      border-bottom: 2px solid #1c1c24;
+      padding-bottom: 12px;
+      flex-shrink: 0;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-origin {
+      width: 32px;
+      height: 32px;
+      fill: #1827fa;
+      flex-shrink: 0;
+    }
+    .header-wordmark {
+      height: 22px;
+      fill: #f8f8f7;
+    }
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      background: #0c0d14;
+      border: 1px solid #282838;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9898a8;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    /* Central Content Chassis: Unified High-Density Modular Stage */
+    #content-slot {
+      position: relative;
+      width: 940px;
+      height: 1390px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 56px;
+      border-top: 2px solid #1c1c24;
+      padding-top: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #727284;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .footer-capsule {
+      background: #1827fa;
+      color: #ffffff;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      margin-right: 10px;
+    }
+    .footer-beat-clock {
+      font-family: monospace;
+      font-size: 16px;
+      color: #9999aa;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div class="grid-lines"></div>
+    <div class="safe-frame">
+      <!-- Fixed Header -->
+      <div class="header-bar">
+        <div class="header-left">
+          <svg class="header-origin" viewBox="0 0 28 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.192 12.282l-9.06 5.883H5.84l7.168-4.654v6.619l3.025-1.965v-5.883h9.06l3.948-2.564H18.847l9.06-5.883H23.2l-7.168 4.654V1.87l-3.025 1.965v5.883h-9.06L0 12.282h10.192z" fill="#1827fa"></path>
+          </svg>
+          <svg class="header-wordmark" viewBox="0 0 996 214" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M956.965 43.712L909.512 97.01V0h-27.817v169.473h27.817v-38.102l15.428-16.597 37.869 54.699h33.193l-52.128-75.036 46.752-50.725h-33.661zM867.456 43.01c-17.064.468-28.985 8.884-35.063 23.377V43.712h-27.116v125.761h27.817v-64.751c0-24.778 9.818-34.128 28.986-34.128 3.506 0 6.779.234 11.454.935V43.245c-2.104-.234-4.207-.234-6.078-.234z" fill="#F8F8F7"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M720.301 41.374c17.532 0 32.258 7.714 39.972 21.038v-18.7h28.051v125.761h-28.051V151.24c-7.714 13.558-22.44 21.272-39.972 21.272-30.155 0-54.232-24.311-54.232-65.686 0-41.14 24.077-65.452 54.232-65.452zm7.948 108.463c17.531 0 33.427-12.623 33.427-43.011 0-30.388-15.896-42.777-33.427-42.777-19.168 0-32.493 15.428-32.493 42.777 0 27.583 13.325 43.011 32.493 43.011z" fill="#F8F8F7"></path>
+            <path d="M565.321 205.974l-27.817 4.406V43.712h27.817v18.7c7.948-13.324 22.44-21.038 40.206-21.038 30.154 0 54.465 24.311 54.465 65.452 0 41.375-24.311 65.686-54.465 65.686-17.766 0-32.258-7.714-40.206-21.272v54.734zm32.024-56.137c19.402 0 32.96-15.428 32.96-43.011 0-27.35-13.558-42.777-32.96-42.777-17.531 0-33.193 12.389-33.193 42.777s15.662 43.011 33.193 43.011z" fill="#F8F8F7"></path>
+            <path d="M463.588 91.165l19.87 3.74c25.946 4.909 43.712 13.791 43.712 37.167 0 26.181-23.843 40.44-54.933 40.44-32.959 0-53.764-18.935-56.802-43.713h27.583c3.272 14.493 13.09 21.973 29.687 21.973 15.194 0 27.115-5.843 27.115-15.895 0-10.051-9.35-14.727-23.375-17.298l-20.103-3.74c-19.636-3.74-37.635-13.09-37.635-35.297 0-24.077 24.077-37.635 53.063-37.635 27.583 0 49.088 14.026 53.296 39.505h-27.349C494.678 67.555 483.691 62.88 469.9 62.88c-12.389 0-24.077 4.442-24.077 14.493 0 7.714 6.077 11.688 17.765 13.792zM283.411 64.05c-18.934 0-29.453 13.09-29.453 38.569v66.854h-27.817V4.405L253.958 0v61.712c6.545-10.987 19.402-20.337 39.972-20.337 31.09 0 41.843 19.402 41.843 50.024v78.074h-27.817v-70.36c0-18.935-2.338-35.064-24.545-35.064z" fill="#F8F8F7"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M140.563 41.375c17.531 0 31.557 7.714 39.505 21.038v-18.7h27.583v111.735c0 40.673-23.376 57.971-58.673 57.971-31.09 0-50.959-14.493-55.634-39.271h27.817c3.506 10.753 11.22 17.298 27.817 17.298 18.934 0 31.09-8.883 31.09-31.557v-14.493c-7.948 13.558-21.974 21.038-39.505 21.038-29.687 0-54.232-22.207-54.232-62.647 0-39.972 24.545-62.412 54.232-62.412zm7.948 102.619c17.531 0 32.725-10.987 32.725-40.207 0-28.985-15.194-39.738-32.725-39.738-18.701 0-32.493 13.792-32.493 39.738 0 26.415 13.792 40.207 32.493 40.207z" fill="#F8F8F7"></path>
+            <path d="M359.184 136.513c0 27.35 7.48 32.96 34.128 32.96h25.066l-9.575-21.506h-7.309c-12.389 0-14.493-3.039-14.493-15.661V64.75h25.246V43.712h-25.246V10.986h-27.817v32.726h-22.928l9.367 21.038h13.561v71.763zM47.381 43.712v125.761h27.817V43.713H47.381zM47.381 0v27.583h27.817V0H47.381zM0 169.473V0h27.817v169.473H0z" fill="#F8F8F7"></path>
+          </svg>
+        </div>
+        <div class="header-pill">
+          <span class="status-dot"></span>
+          <span id="badge-label">ENTERPRISE GRID</span>
+        </div>
+      </div>
+
+      <!-- Main Central Dynamic Slot -->
+      <div id="content-slot"></div>
+
+      <!-- Fixed Footer -->
+      <div class="footer-bar">
+        <div>
+          <span class="footer-capsule">LIGHTNING / UMA</span>
+          <span style="color:#d8d8e2;">GLOBAL PAYMENTS OPERATING SYSTEM</span>
+        </div>
+        <div class="footer-beat-clock" id="beat-label">
+          B:01/40 • 120 BPM
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function easeExp(p, k = 7.5) {
+      if (p <= 0) return 0;
+      if (p >= 1) return 1;
+      return (1 - Math.exp(-k * p)) / (1 - Math.exp(-k));
+    }
+
+    function calcVelocityBlur(p, maxPx = 16) {
+      if (p <= 0 || p >= 0.75) return 0;
+      const speed = (7.5 * Math.exp(-7.5 * p));
+      return Math.min(maxPx, speed * 2.2);
+    }
+
+    const slot = document.getElementById('content-slot');
+    const badgeLabel = document.getElementById('badge-label');
+    const beatLabel = document.getElementById('beat-label');
+
+    window.seek = function(t) {
+      t = Math.max(0, Math.min(20.0, t));
+      const bpm = 120;
+      const beatInterval = 0.5; // seconds
+      const beat = Math.min(39, Math.floor(t / beatInterval));
+      const p = (t % beatInterval) / beatInterval;
+      const bar = Math.floor(beat / 4);
+
+      const ease = easeExp(p);
+      const blurY = calcVelocityBlur(p, 16);
+
+      beatLabel.textContent = `B:${String(beat + 1).padStart(2, '0')}/40 • 120 BPM`;
+
+      let inner = '';
+
+      switch (bar) {
+        // ==========================================
+        // BAR 1 (Beats 0-3, 0.0s - 2.0s): THE HOOK
+        // ==========================================
+        case 0:
+          if (beat === 0) {
+            badgeLabel.textContent = "LEGACY BOTTLENECK";
+            const y = (1 - ease) * 60;
+            inner = `
+              <div style="transform: translateY(${y}px); filter: blur(0px ${blurY}px);">
+                <div style="display:inline-block; padding:10px 22px; background:#220c0c; border:2px solid #771818; border-radius:10px; color:#ff4d4d; font-size:22px; font-weight:900; letter-spacing:0.06em; margin-bottom:20px;">
+                  ⚠️ THE REALITY OF LEGACY MONEY
+                </div>
+                <div style="font-size:116px; font-weight:900; line-height:0.95; letter-spacing:-0.04em; color:#ffffff;">
+                  MONEY IS<br><span style="color:#ff3b30;">STILL STUCK.</span>
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c0d16; border:2px solid #242534; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ff4d4d; margin-bottom:14px;">THE DIGITAL PARADOX</div>
+                <div style="font-size:32px; font-weight:500; color:#8e8ea2; line-height:1.45;">
+                  Data travels around the planet in 80 milliseconds.<br>Why do global payments still take days and sleep on weekends?
+                </div>
+              </div>
+            `;
+          } else if (beat === 1) {
+            badgeLabel.textContent = "SETTLEMENT DELAY";
+            const strikeWidth = Math.min(100, ease * 105);
+            inner = `
+              <div>
+                <div style="font-size:28px; font-weight:800; color:#88889a; letter-spacing:0.06em; margin-bottom:12px;">
+                  TRADITIONAL CLEARING RAILS:
+                </div>
+                <div style="position:relative; display:inline-block; font-size:124px; font-weight:900; line-height:0.95; letter-spacing:-0.04em; color:#ffffff;">
+                  3 TO 5 DAYS.
+                  <div style="position:absolute; left:-3%; top:50%; width:${strikeWidth}%; height:16px; background:#ef4444; transform:rotate(-3deg); border-radius:8px;"></div>
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#161010; border-left:10px solid #ef4444; border-radius:20px;">
+                <div style="font-size:34px; font-weight:800; color:#ffffff; margin-bottom:12px;">CORRESPONDENT BANKING CHAOS</div>
+                <div style="font-size:28px; font-weight:500; color:#c08888; line-height:1.4;">
+                  Batch processing windows. 5 PM cut-offs. Unpredictable intermediary fees. High failure rates.
+                </div>
+              </div>
+            `;
+          } else if (beat === 2) {
+            badgeLabel.textContent = "THE PARADIGM SHIFT";
+            const scale = 0.94 + ease * 0.06;
+            inner = `
+              <div style="transform: scale(${scale}); filter: blur(0px ${blurY * 0.7}px);">
+                <div style="background:#ffffff; color:#000000; padding:52px 40px; border-radius:28px; text-align:center;">
+                  <div style="font-size:26px; font-weight:900; letter-spacing:0.12em; color:#1827fa; margin-bottom:10px;">
+                    THE NEW REALITY
+                  </div>
+                  <div style="font-size:120px; font-weight:900; line-height:0.92; letter-spacing:-0.05em;">
+                    NOT ANYMORE.
+                  </div>
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px; text-align:center;">
+                <div style="font-size:34px; font-weight:800; color:#ffffff; margin-bottom:12px;">STREAMING GLOBAL VALUE</div>
+                <div style="font-size:28px; font-weight:500; color:#9090aa;">Real-time settlement for the modern global economy.</div>
+              </div>
+            `;
+          } else { // beat === 3
+            badgeLabel.textContent = "ENTER LIGHTSPARK";
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px); filter: blur(0px ${blurY}px);">
+                <div style="font-size:28px; font-weight:800; color:#88889a; letter-spacing:0.06em; margin-bottom:12px;">
+                  ENTER THE MONEY GRID
+                </div>
+                <div style="font-size:112px; font-weight:900; line-height:0.96; letter-spacing:-0.04em; color:#ffffff;">
+                  THE API<br><span style="color:#1827fa;">FOR MONEY.</span>
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0a122e; border:3px solid #1827fa; border-radius:28px;">
+                <div style="font-size:32px; font-weight:900; color:#ffffff; margin-bottom:12px;">ENTERPRISE LIGHTNING PLATFORM</div>
+                <div style="font-size:28px; font-weight:600; color:#8ea4db; line-height:1.4;">
+                  Connect traditional financial institutions with Bitcoin's layer-2 settlement network.
+                </div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 2 (Beats 4-7, 2.0s - 4.0s): ONE API & GLOBAL RAILS
+        // ==========================================
+        case 1:
+          badgeLabel.textContent = "GLOBAL CONNECTIVITY";
+          if (beat === 4) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 01 • INFRASTRUCTURE
+                </div>
+                <div style="font-size:104px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  ONE API.<br>GLOBAL MONEY.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c0d16; border:2px solid #242534; border-radius:28px;">
+                <div style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:16px;">UNIFIED FINANCIAL SYSTEM</div>
+                <div style="font-size:28px; font-weight:500; color:#88889c; line-height:1.5;">
+                  Launch global accounts, instant payments, cards, and stablecoins under your own brand with one single integration.
+                </div>
+              </div>
+            `;
+          } else if (beat === 5) {
+            const count = Math.min(65, Math.floor(ease * 65));
+            inner = `
+              <div>
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:8px;">
+                  GLOBAL FOOTPRINT
+                </div>
+                <div style="font-size:160px; font-weight:900; line-height:0.88; letter-spacing:-0.05em; color:#f8f8f7; font-family:monospace;">
+                  ${count}+
+                </div>
+                <div style="font-size:56px; font-weight:900; color:#ffffff; margin-top:8px;">
+                  COUNTRIES CONNECTED
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c1228; border:2px solid #1827fa; border-radius:28px;">
+                <div style="font-size:28px; font-weight:900; color:#aaccff; margin-bottom:10px;">DOMESTIC BANK CORRIDORS</div>
+                <div style="font-size:26px; color:#d0d8f0;">Direct local settlement in the Americas, Europe, Asia, and Latin America.</div>
+              </div>
+            `;
+          } else if (beat === 6) {
+            inner = `
+              <div>
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.08em; color:#1827fa; margin-bottom:10px;">
+                  DIRECT CLEARING INTEGRATIONS
+                </div>
+                <div style="font-size:82px; font-weight:900; line-height:1.0; letter-spacing:-0.03em;">
+                  DOMESTIC RAILS.
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:22px 28px; background:#141522; border:2px solid #1827fa; border-radius:18px;">
+                  <span style="font-size:28px; font-weight:900; color:#ffffff;">US • FEDNOW / RTP / ACH</span>
+                  <span style="font-size:20px; font-weight:800; color:#1827fa; background:#091038; padding:6px 14px; border-radius:8px;">INSTANT</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:22px 28px; background:#141522; border:1px solid #28283c; border-radius:18px;">
+                  <span style="font-size:28px; font-weight:900; color:#ffffff;">EUROPE • SEPA INSTANT</span>
+                  <span style="font-size:20px; font-weight:800; color:#8888aa; background:#1c1c28; padding:6px 14px; border-radius:8px;">INSTANT</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:22px 28px; background:#141522; border:1px solid #28283c; border-radius:18px;">
+                  <span style="font-size:28px; font-weight:900; color:#ffffff;">BRAZIL • PIX</span>
+                  <span style="font-size:20px; font-weight:800; color:#8888aa; background:#1c1c28; padding:6px 14px; border-radius:8px;">INSTANT</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:22px 28px; background:#141522; border:1px solid #28283c; border-radius:18px;">
+                  <span style="font-size:28px; font-weight:900; color:#ffffff;">MEXICO • SPEI</span>
+                  <span style="font-size:20px; font-weight:800; color:#8888aa; background:#1c1c28; padding:6px 14px; border-radius:8px;">INSTANT</span>
+                </div>
+              </div>
+            `;
+          } else { // beat === 7
+            inner = `
+              <div>
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.08em; color:#1827fa; margin-bottom:10px;">
+                  PRODUCT ARCHITECTURE
+                </div>
+                <div style="font-size:86px; font-weight:900; line-height:1.0; letter-spacing:-0.03em;">
+                  LIGHTSPARK EXTEND.
+                </div>
+              </div>
+              <div style="padding:48px 40px; background:#0c1328; border:3px solid #1827fa; border-radius:28px;">
+                <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+                  <span style="width:14px; height:14px; border-radius:50%; background:#10b981;"></span>
+                  <span style="font-size:22px; font-weight:900; color:#10b981; letter-spacing:0.08em;">DIRECT BANK DEPOSIT</span>
+                </div>
+                <div style="font-size:56px; font-weight:900; line-height:1.1; color:#ffffff;">
+                  FUNDS LAND IN EXISTING BANK ACCOUNTS.
+                </div>
+                <div style="font-size:26px; font-weight:600; color:#9cb1dd; margin-top:24px;">
+                  Compatible with the vast majority of U.S. and global real-time deposit accounts.
+                </div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 3 (Beats 8-11, 4.0s - 6.0s): REAL-TIME SETTLEMENT
+        // ==========================================
+        case 2:
+          badgeLabel.textContent = "SETTLEMENT VELOCITY";
+          if (beat === 8) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 02 • SPEED
+                </div>
+                <div style="font-size:104px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  REAL-TIME<br>SETTLEMENT.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#081810; border:2px solid #10b981; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#10b981; margin-bottom:12px;">LIGHTNING NETWORK VELOCITY</div>
+                <div style="font-size:26px; font-weight:500; color:#c0dec9; line-height:1.45;">
+                  Transactions settle irrevocably at the speed of light with zero counterparty credit risk.
+                </div>
+              </div>
+            `;
+          } else if (beat === 9) {
+            const ms = Math.floor(412 + (1 - ease) * 350);
+            inner = `
+              <div>
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#10b981; margin-bottom:8px;">
+                  CONFIRMATION LATENCY
+                </div>
+                <div style="font-size:160px; font-weight:900; line-height:0.88; letter-spacing:-0.05em; color:#10b981; font-family:monospace;">
+                  ${ms}ms
+                </div>
+                <div style="font-size:56px; font-weight:900; color:#ffffff; margin-top:8px;">
+                  SUB-SECOND CLEARING.
+                </div>
+              </div>
+              <div style="padding:44px; background:#12131c; border:1px solid #28283c; border-radius:24px;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; margin-bottom:8px;">INSTANT CASH RECONCILIATION</div>
+                <div style="font-size:24px; color:#88889a;">Funds are credited, validated, and spendable in milliseconds worldwide.</div>
+              </div>
+            `;
+          } else if (beat === 10) {
+            inner = `
+              <div>
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:8px;">
+                  SYSTEM AVAILABILITY
+                </div>
+                <div style="font-size:130px; font-weight:900; line-height:0.92; letter-spacing:-0.05em; color:#f8f8f7;">
+                  24 / 7 / 365
+                </div>
+                <div style="font-size:52px; font-weight:900; color:#1827fa; margin-top:14px;">
+                  ALWAYS ON. NEVER SLEEPS.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0e1018; border:2px solid #222232; border-radius:24px;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; margin-bottom:10px;">ZERO BANKING CUT-OFFS</div>
+                <div style="font-size:25px; color:#88889a; line-height:1.4;">
+                  Transact during holidays, weekends, or late hours with identical sub-second finality.
+                </div>
+              </div>
+            `;
+          } else { // beat === 11
+            inner = `
+              <div>
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.08em; color:#10b981; margin-bottom:10px;">
+                  CRYPTOGRAPHIC CERTAINTY
+                </div>
+                <div style="font-size:82px; font-weight:900; line-height:1.0; letter-spacing:-0.03em;">
+                  ZERO CHARGEBACKS.
+                </div>
+              </div>
+              <div style="padding:48px 40px; background:#08160f; border:3px solid #10b981; border-radius:28px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+                  <span style="font-size:26px; font-weight:800; color:#888899;">SETTLEMENT STATE</span>
+                  <span style="font-size:22px; font-weight:900; color:#10b981; background:#042e16; padding:8px 20px; border-radius:999px;">● 100% FINALITY</span>
+                </div>
+                <div style="font-size:54px; font-weight:900; line-height:1.1; color:#ffffff;">
+                  IRREVOCABLE ON-CHAIN VERIFICATION.
+                </div>
+                <div style="font-size:26px; font-weight:600; color:#a2cca8; margin-top:20px;">
+                  Decentralized layer-2 mathematics eliminate payment clawbacks.
+                </div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 4 (Beats 12-15, 6.0s - 8.0s): FRACTIONAL COST
+        // ==========================================
+        case 3:
+          badgeLabel.textContent = "UNIT ECONOMICS";
+          if (beat === 12) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 03 • COST
+                </div>
+                <div style="font-size:98px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  FRACTIONAL<br>TRANSACTION COST.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#12131e; border:2px solid #28283a; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">DISRUPTING LEGACY TOLLS</div>
+                <div style="font-size:26px; font-weight:500; color:#8e8e9f; line-height:1.45;">
+                  Dramatically undercutting international remittance rails and interchange fees.
+                </div>
+              </div>
+            `;
+          } else if (beat === 13) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#ff6666; letter-spacing:0.08em; margin-bottom:10px;">
+                  LEGACY REMITTANCE & SWIFT
+                </div>
+                <div style="font-size:120px; font-weight:900; color:#ffffff; font-family:monospace; line-height:0.9;">
+                  3.5% - 7.0%
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#1a0f0f; border:2px solid #551818; border-radius:24px;">
+                <div style="font-size:28px; font-weight:800; color:#ff8888; margin-bottom:8px;">HIDDEN INTERMEDIARY EXPENSES</div>
+                <div style="font-size:25px; color:#bb7777;">Correspondent bank cuts, inflated FX spreads, and fixed wire charges.</div>
+              </div>
+            `;
+          } else if (beat === 14) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#10b981; letter-spacing:0.08em; margin-bottom:10px;">
+                  LIGHTSPARK INFRASTRUCTURE
+                </div>
+                <div style="font-size:150px; font-weight:900; color:#ffffff; font-family:monospace; line-height:0.88;">
+                  ~0.15%
+                </div>
+                <div style="font-size:36px; font-weight:800; color:#10b981; margin-top:14px;">
+                  A FRACTION OF A PERCENT.
+                </div>
+              </div>
+              <div style="padding:44px; background:#07180e; border:2px solid #10b981; border-radius:24px;">
+                <div style="font-size:28px; font-weight:800; color:#ffffff; margin-bottom:6px;">95% SAVINGS CAPTURED</div>
+                <div style="font-size:25px; color:#95cda2;">Direct peer-to-peer liquidity routing over Lightning nodes.</div>
+              </div>
+            `;
+          } else { // beat === 15
+            inner = `
+              <div style="background:#ffffff; color:#000000; padding:52px 40px; border-radius:28px;">
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  BUSINESS IMPACT
+                </div>
+                <div style="font-size:84px; font-weight:900; line-height:1.0; letter-spacing:-0.04em;">
+                  YOUR ECONOMICS.<br>YOUR MARGIN.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#12131e; border:2px solid #28283a; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">FULL PRICING AUTONOMY</div>
+                <div style="font-size:26px; font-weight:500; color:#9090aa; line-height:1.45;">
+                  Pass the savings to end-users to win market share or retain superior interchange margin.
+                </div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 5 (Beats 16-19, 8.0s - 10.0s): UNIVERSAL MONEY ADDRESS (UMA)
+        // ==========================================
+        case 4:
+          badgeLabel.textContent = "UMA STANDARD";
+          if (beat === 16) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 04 • UMA PROTOCOL
+                </div>
+                <div style="font-size:100px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  SEND MONEY<br>LIKE EMAIL.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c1126; border:2px solid #1827fa; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">UNIVERSAL MONEY ADDRESS (UMA)</div>
+                <div style="font-size:26px; font-weight:500; color:#9cb1e2; line-height:1.45;">
+                  Human-readable financial addressing built on open standards. No clunky account numbers.
+                </div>
+              </div>
+            `;
+          } else if (beat === 17) {
+            const textToType = "alice@wallet.com";
+            const chars = Math.min(textToType.length, Math.floor(ease * textToType.length));
+            const typed = textToType.substring(0, chars);
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:800; color:#888899; margin-bottom:14px;">SENDER ADDRESS:</div>
+                <div style="padding:36px 40px; background:#121218; border:3px solid #1827fa; border-radius:22px; font-family:monospace; font-size:56px; font-weight:900; color:#ffffff;">
+                  <span style="color:#1827fa;">$</span>${typed}<span style="color:#1827fa;">|</span>
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:24px;">
+                <div style="font-size:28px; font-weight:800; color:#ffffff; margin-bottom:8px;">OPEN PROTOCOL STANDARD</div>
+                <div style="font-size:24px; color:#8888a0;">Co-developed with the global community for complete ecosystem interoperability.</div>
+              </div>
+            `;
+          } else if (beat === 18) {
+            inner = `
+              <div>
+                <div style="padding:28px 36px; background:#121218; border:2px solid #28283a; border-radius:18px; font-family:monospace; font-size:46px; font-weight:800; color:#888899;">
+                  $alice@wallet.com
+                </div>
+                <div style="text-align:center; font-size:36px; color:#1827fa; font-weight:900; margin:18px 0;">
+                  ⬇ INSTANT UMA ROUTE ⬇
+                </div>
+                <div style="padding:28px 36px; background:#0c1610; border:3px solid #10b981; border-radius:18px; font-family:monospace; font-size:48px; font-weight:900; color:#ffffff;">
+                  $bob@bank.com
+                </div>
+              </div>
+              <div style="padding:44px; background:#12131c; border:1px solid #28283c; border-radius:24px;">
+                <div style="font-size:28px; font-weight:700; color:#10b981; margin-bottom:8px;">PEER-TO-PEER RESOLUTION</div>
+                <div style="font-size:24px; color:#88889a;">Direct cross-institution payment routing with automated verification.</div>
+              </div>
+            `;
+          } else { // beat === 19
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  INTEROPERABLE RAIL
+                </div>
+                <div style="font-size:84px; font-weight:900; line-height:1.0; letter-spacing:-0.03em;">
+                  ZERO WALLET<br>LOCK-IN.
+                </div>
+              </div>
+              <div style="padding:48px 40px; background:#0c1430; border:3px solid #1827fa; border-radius:28px;">
+                <div style="font-size:32px; font-weight:900; color:#ffffff; margin-bottom:14px;">NOT A WALLED GARDEN</div>
+                <div style="font-size:26px; font-weight:600; color:#9db2e2; line-height:1.45;">
+                  Unlike PayPal or Venmo handles, UMA works universally between any bank, neobank, or crypto wallet.
+                </div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 6 (Beats 20-23, 10.0s - 12.0s): CURRENCY AGNOSTIC & FX
+        // ==========================================
+        case 5:
+          badgeLabel.textContent = "GLOBAL FX ROUTING";
+          if (beat === 20) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 05 • FX ENGINE
+                </div>
+                <div style="font-size:98px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  CURRENCY<br>AGNOSTIC.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#12131e; border:2px solid #28283a; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">TRANSPARENT VALUE TRANSFER</div>
+                <div style="font-size:26px; font-weight:500; color:#8e8e9f; line-height:1.45;">
+                  Users transact in native fiat currencies while the network orchestrates background FX liquidity.
+                </div>
+              </div>
+            `;
+          } else if (beat === 21) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:800; color:#888899; margin-bottom:12px;">ORIGINATING CURRENCY:</div>
+                <div style="padding:40px 44px; background:#141522; border:3px solid #33334c; border-radius:24px;">
+                  <div style="font-size:92px; font-weight:900; color:#ffffff; font-family:monospace; line-height:0.95;">
+                    $1,000 USD
+                  </div>
+                  <div style="font-size:26px; font-weight:700; color:#1827fa; margin-top:16px;">
+                    ● DEBITED LOCALLY IN US DOLLARS
+                  </div>
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:1px solid #28283a; border-radius:20px; font-size:26px; color:#8888a0;">
+                Sender experiences pure domestic fiat payment simplicity.
+              </div>
+            `;
+          } else if (beat === 22) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:12px;">
+                  ROUTING LAYER
+                </div>
+                <div style="padding:48px 40px; background:#0a1232; border:3px solid #1827fa; border-radius:28px; text-align:center;">
+                  <div style="font-size:62px; font-weight:900; color:#ffffff; line-height:1.1;">
+                    LIGHTNING LIQUIDITY<br>CONDUIT
+                  </div>
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:24px; text-align:center;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; margin-bottom:8px;">ZERO PRICE VOLATILITY</div>
+                <div style="font-size:25px; color:#8888a0;">Micro-second hop conversion eliminates crypto balance risk entirely.</div>
+              </div>
+            `;
+          } else { // beat === 23
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:800; color:#888899; margin-bottom:12px;">DESTINATION CURRENCY:</div>
+                <div style="padding:40px 44px; background:#07180e; border:3px solid #10b981; border-radius:24px;">
+                  <div style="font-size:92px; font-weight:900; color:#ffffff; font-family:monospace; line-height:0.95;">
+                    €920 EUR
+                  </div>
+                  <div style="font-size:26px; font-weight:700; color:#10b981; margin-top:16px;">
+                    ● CREDITED LOCALLY IN EUROS INSTANTLY
+                  </div>
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:1px solid #28283a; border-radius:20px; font-size:26px; color:#8888a0;">
+                Recipient receives instant spendable euros into their domestic account.
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 7 (Beats 24-27, 12.0s - 14.0s): DEVELOPER SDK & COMPLIANCE
+        // ==========================================
+        case 6:
+          badgeLabel.textContent = "DEVELOPER ENGINE";
+          if (beat === 24) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 06 • DEVELOPER PLATFORM
+                </div>
+                <div style="font-size:98px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  LIGHTSPARK<br>SDK & APIS.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">BUILT FOR ENGINEERS</div>
+                <div style="font-size:26px; font-weight:500; color:#8888a0; line-height:1.45;">
+                  Type-safe client libraries with comprehensive webhooks and sandbox environments.
+                </div>
+              </div>
+            `;
+          } else if (beat === 25) {
+            inner = `
+              <div style="background:#090a10; border:2px solid #222232; border-radius:24px; padding:36px 40px; font-family:monospace;">
+                <div style="display:flex; gap:10px; margin-bottom:20px;">
+                  <span style="width:14px; height:14px; border-radius:50%; background:#ef4444;"></span>
+                  <span style="width:14px; height:14px; border-radius:50%; background:#f59e0b;"></span>
+                  <span style="width:14px; height:14px; border-radius:50%; background:#10b981;"></span>
+                </div>
+                <div style="font-size:28px; line-height:1.6; color:#ffffff;">
+                  <span style="color:#1827fa;">const</span> client = <span style="color:#1827fa;">new</span> LightsparkClient();<br><br>
+                  <span style="color:#1827fa;">await</span> client.payUmaInvoice({<br>
+                  &nbsp;&nbsp;receiver: <span style="color:#10b981;">"$bob@bank.com"</span>,<br>
+                  &nbsp;&nbsp;amount: <span style="color:#f59e0b;">1000_00</span>,<br>
+                  &nbsp;&nbsp;currency: <span style="color:#10b981;">"USD"</span><br>
+                  });
+                </div>
+              </div>
+              <div style="padding:40px 44px; background:#12131c; border:1px solid #28283c; border-radius:20px; font-size:25px; color:#8888a0;">
+                One clean function call handles lookup, quoting, travel rule, and execution.
+              </div>
+            `;
+          } else if (beat === 26) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  ENTERPRISE COMPLIANCE
+                </div>
+                <div style="font-size:78px; font-weight:900; line-height:1.02; color:#ffffff;">
+                  TRAVEL RULE & AML<br>BUILT-IN.
+                </div>
+              </div>
+              <div style="padding:48px 40px; background:#10111c; border:3px solid #33334c; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">PRE-FLIGHT COMPLIANCE EXCHANGE</div>
+                <div style="font-size:26px; font-weight:500; color:#9898aa; line-height:1.45;">
+                  Automated VASP-to-VASP identity verification occurs before final transaction execution.
+                </div>
+              </div>
+            `;
+          } else { // beat === 27
+            inner = `
+              <div style="background:#ffffff; color:#000000; padding:52px 40px; border-radius:28px;">
+                <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+                  <span style="width:18px; height:18px; border-radius:50%; background:#10b981;"></span>
+                  <span style="font-size:24px; font-weight:900; color:#1827fa; letter-spacing:0.06em;">ENTERPRISE RELIABILITY</span>
+                </div>
+                <div style="font-size:76px; font-weight:900; line-height:1.0; letter-spacing:-0.04em;">
+                  MANAGED OR<br>SELF-HOSTED.
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; margin-bottom:8px;">REGULATORY COMPLIANT ARCHITECTURE</div>
+                <div style="font-size:25px; color:#8888a0;">Full custody segregation and SOC-2 verified infrastructure.</div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 8 (Beats 28-31, 14.0s - 16.0s): GLOBAL ACCOUNTS & CARDS
+        // ==========================================
+        case 7:
+          badgeLabel.textContent = "GLOBAL ACCOUNTS";
+          if (beat === 28) {
+            const y = (1 - ease) * 50;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:24px; font-weight:900; letter-spacing:0.1em; color:#1827fa; margin-bottom:12px;">
+                  CAPABILITY 07 • PROGRAM EXPANSION
+                </div>
+                <div style="font-size:98px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  GLOBAL DOLLAR<br>ACCOUNTS.
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#12131e; border:2px solid #28283a; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#ffffff; margin-bottom:12px;">MULTI-CURRENCY BALANCES</div>
+                <div style="font-size:26px; font-weight:500; color:#9090aa; line-height:1.45;">
+                  Issue global balances, virtual accounts, and payment rails under your brand.
+                </div>
+              </div>
+            `;
+          } else if (beat === 29) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  CARD ISSUANCE ENGINE
+                </div>
+                <div style="font-size:78px; font-weight:900; line-height:1.02; color:#ffffff;">
+                  BRANDED CARDS &<br>STABLECOINS.
+                </div>
+              </div>
+              <div style="padding:48px 40px; background:#0b1434; border:3px solid #1827fa; border-radius:28px;">
+                <div style="font-size:30px; font-weight:900; color:#ffffff; margin-bottom:12px;">VIRTUAL & PHYSICAL SPEND</div>
+                <div style="font-size:26px; font-weight:600; color:#a2b5e2; line-height:1.45;">
+                  Allow users to tap and spend balances anywhere Mastercard and Visa are accepted worldwide.
+                </div>
+              </div>
+            `;
+          } else if (beat === 30) {
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  FULL PAYMENTS LIFECYCLE
+                </div>
+                <div style="font-size:82px; font-weight:900; line-height:1.0;">
+                  ALL-IN-ONE ENGINE.
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <div style="padding:24px 32px; background:#141522; border:2px solid #1827fa; border-radius:18px; font-size:30px; font-weight:900; color:#ffffff;">
+                  ✓ INSTANT PAY-INS
+                </div>
+                <div style="padding:24px 32px; background:#141522; border:1px solid #28283c; border-radius:18px; font-size:30px; font-weight:900; color:#ffffff;">
+                  ✓ GLOBAL PAYOUTS
+                </div>
+                <div style="padding:24px 32px; background:#141522; border:1px solid #28283c; border-radius:18px; font-size:30px; font-weight:900; color:#ffffff;">
+                  ✓ DIRECT LIQUIDITY RAMPS
+                </div>
+              </div>
+            `;
+          } else { // beat === 31
+            inner = `
+              <div>
+                <div style="font-size:26px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  ENTERPRISE ECOSYSTEM
+                </div>
+                <div style="font-size:82px; font-weight:900; line-height:1.0;">
+                  TRUSTED LEADERS.
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div style="padding:22px 32px; background:#1827fa; color:#ffffff; font-size:30px; font-weight:900; border-radius:16px;">BANKS & NEOBANKS</div>
+                <div style="padding:22px 32px; background:#141522; border:1px solid #33334c; color:#ffffff; font-size:30px; font-weight:900; border-radius:16px;">GLOBAL FINTECHS</div>
+                <div style="padding:22px 32px; background:#141522; border:1px solid #33334c; color:#ffffff; font-size:30px; font-weight:900; border-radius:16px;">CRYPTO EXCHANGES</div>
+                <div style="padding:22px 32px; background:#141522; border:1px solid #33334c; color:#ffffff; font-size:30px; font-weight:900; border-radius:16px;">DIGITAL WALLETS</div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 9 (Beats 32-35, 16.0s - 18.0s): THE CLIMAX
+        // ==========================================
+        case 8:
+          badgeLabel.textContent = "THE MONEY GRID";
+          if (beat === 32) {
+            const scale = 0.94 + ease * 0.06;
+            inner = `
+              <div style="transform: scale(${scale}); filter: blur(0px ${blurY}px);">
+                <div style="font-size:124px; font-weight:900; line-height:0.95; letter-spacing:-0.05em; color:#ffffff;">
+                  MONEY AT<br>THE SPEED<br><span style="color:#1827fa;">OF LIGHT.</span>
+                </div>
+              </div>
+              <div style="padding:48px 44px; background:#0c1228; border:2px solid #1827fa; border-radius:28px;">
+                <div style="font-size:30px; font-weight:800; color:#aaccff; margin-bottom:8px;">INSTANT CAPITAL VELOCITY</div>
+                <div style="font-size:26px; color:#d0d8f0;">A modern financial rail architected for an interconnected digital world.</div>
+              </div>
+            `;
+          } else if (beat === 33) {
+            const y = (1 - ease) * 40;
+            inner = `
+              <div style="transform: translateY(${y}px);">
+                <div style="font-size:28px; font-weight:900; color:#888899; margin-bottom:10px;">FOUNDATIONAL ARCHITECTURE:</div>
+                <div style="font-size:112px; font-weight:900; line-height:0.96; letter-spacing:-0.04em; color:#ffffff;">
+                  BUILT ON<br><span style="color:#f59e0b;">BITCOIN.</span>
+                </div>
+              </div>
+              <div style="padding:44px; background:#161208; border:2px solid #553e14; border-radius:24px;">
+                <div style="font-size:28px; font-weight:800; color:#f59e0b; margin-bottom:8px;">NEUTRAL SETTLEMENT RAIL</div>
+                <div style="font-size:25px; color:#c8b082;">Open, decentralized, and borderless base settlement protocol.</div>
+              </div>
+            `;
+          } else if (beat === 34) {
+            inner = `
+              <div>
+                <div style="font-size:28px; font-weight:900; color:#888899; margin-bottom:10px;">ROUTING INTELLIGENCE:</div>
+                <div style="font-size:112px; font-weight:900; line-height:0.96; letter-spacing:-0.04em; color:#ffffff;">
+                  POWERED<br>BY <span style="color:#1827fa;">AI.</span>
+                </div>
+              </div>
+              <div style="padding:44px; background:#09102c; border:2px solid #1827fa; border-radius:24px;">
+                <div style="font-size:28px; font-weight:800; color:#1827fa; margin-bottom:8px;">PREDICTIVE LIQUIDITY</div>
+                <div style="font-size:25px; color:#9db2e6;">Machine learning models predict and optimize Lightning channel throughput.</div>
+              </div>
+            `;
+          } else { // beat === 35
+            inner = `
+              <div style="background:#ffffff; color:#000000; padding:52px 40px; border-radius:28px; text-align:center;">
+                <div style="font-size:28px; font-weight:900; color:#1827fa; letter-spacing:0.08em; margin-bottom:10px;">
+                  ENTERPRISE GRADE
+                </div>
+                <div style="font-size:92px; font-weight:900; line-height:0.98; letter-spacing:-0.04em;">
+                  ZERO FRICTION.<br>INFINITE SCALE.
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px; text-align:center;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; margin-bottom:6px;">GLOBAL MONEY AT INTERNET SPEED</div>
+                <div style="font-size:24px; color:#8888a0;">Unlocking global financial liquidity with institutional reliability.</div>
+              </div>
+            `;
+          }
+          break;
+
+        // ==========================================
+        // BAR 10 (Beats 36-39, 18.0s - 20.0s): OUTRO & CALL TO ACTION
+        // ==========================================
+        case 9:
+        default:
+          badgeLabel.textContent = "LAUNCH TODAY";
+          if (beat === 36) {
+            const size = 180 + ease * 40;
+            inner = `
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <svg style="width:${size}px; height:${size}px; margin-bottom:28px;" viewBox="0 0 28 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.192 12.282l-9.06 5.883H5.84l7.168-4.654v6.619l3.025-1.965v-5.883h9.06l3.948-2.564H18.847l9.06-5.883H23.2l-7.168 4.654V1.87l-3.025 1.965v5.883h-9.06L0 12.282h10.192z" fill="#1827fa"></path>
+                </svg>
+                <div style="font-size:52px; font-weight:900; color:#ffffff; letter-spacing:-0.02em;">
+                  THE ORIGIN POINT
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px; text-align:center;">
+                <div style="font-size:32px; font-weight:700; color:#888899;">OF THE GLOBAL MONEY GRID</div>
+              </div>
+            `;
+          } else if (beat === 37) {
+            inner = `
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <svg style="width:720px; height:auto; margin-bottom:28px;" viewBox="0 0 996 214" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M956.965 43.712L909.512 97.01V0h-27.817v169.473h27.817v-38.102l15.428-16.597 37.869 54.699h33.193l-52.128-75.036 46.752-50.725h-33.661zM867.456 43.01c-17.064.468-28.985 8.884-35.063 23.377V43.712h-27.116v125.761h27.817v-64.751c0-24.778 9.818-34.128 28.986-34.128 3.506 0 6.779.234 11.454.935V43.245c-2.104-.234-4.207-.234-6.078-.234z" fill="#F8F8F7"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M720.301 41.374c17.532 0 32.258 7.714 39.972 21.038v-18.7h28.051v125.761h-28.051V151.24c-7.714 13.558-22.44 21.272-39.972 21.272-30.155 0-54.232-24.311-54.232-65.686 0-41.14 24.077-65.452 54.232-65.452zm7.948 108.463c17.531 0 33.427-12.623 33.427-43.011 0-30.388-15.896-42.777-33.427-42.777-19.168 0-32.493 15.428-32.493 42.777 0 27.583 13.325 43.011 32.493 43.011z" fill="#F8F8F7"></path>
+                  <path d="M565.321 205.974l-27.817 4.406V43.712h27.817v18.7c7.948-13.324 22.44-21.038 40.206-21.038 30.154 0 54.465 24.311 54.465 65.452 0 41.375-24.311 65.686-54.465 65.686-17.766 0-32.258-7.714-40.206-21.272v54.734zm32.024-56.137c19.402 0 32.96-15.428 32.96-43.011 0-27.35-13.558-42.777-32.96-42.777-17.531 0-33.193 12.389-33.193 42.777s15.662 43.011 33.193 43.011z" fill="#F8F8F7"></path>
+                  <path d="M463.588 91.165l19.87 3.74c25.946 4.909 43.712 13.791 43.712 37.167 0 26.181-23.843 40.44-54.933 40.44-32.959 0-53.764-18.935-56.802-43.713h27.583c3.272 14.493 13.09 21.973 29.687 21.973 15.194 0 27.115-5.843 27.115-15.895 0-10.051-9.35-14.727-23.375-17.298l-20.103-3.74c-19.636-3.74-37.635-13.09-37.635-35.297 0-24.077 24.077-37.635 53.063-37.635 27.583 0 49.088 14.026 53.296 39.505h-27.349C494.678 67.555 483.691 62.88 469.9 62.88c-12.389 0-24.077 4.442-24.077 14.493 0 7.714 6.077 11.688 17.765 13.792zM283.411 64.05c-18.934 0-29.453 13.09-29.453 38.569v66.854h-27.817V4.405L253.958 0v61.712c6.545-10.987 19.402-20.337 39.972-20.337 31.09 0 41.843 19.402 41.843 50.024v78.074h-27.817v-70.36c0-18.935-2.338-35.064-24.545-35.064z" fill="#F8F8F7"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M140.563 41.375c17.531 0 31.557 7.714 39.505 21.038v-18.7h27.583v111.735c0 40.673-23.376 57.971-58.673 57.971-31.09 0-50.959-14.493-55.634-39.271h27.817c3.506 10.753 11.22 17.298 27.817 17.298 18.934 0 31.09-8.883 31.09-31.557v-14.493c-7.948 13.558-21.974 21.038-39.505 21.038-29.687 0-54.232-22.207-54.232-62.647 0-39.972 24.545-62.412 54.232-62.412zm7.948 102.619c17.531 0 32.725-10.987 32.725-40.207 0-28.985-15.194-39.738-32.725-39.738-18.701 0-32.493 13.792-32.493 39.738 0 26.415 13.792 40.207 32.493 40.207z" fill="#F8F8F7"></path>
+                  <path d="M359.184 136.513c0 27.35 7.48 32.96 34.128 32.96h25.066l-9.575-21.506h-7.309c-12.389 0-14.493-3.039-14.493-15.661V64.75h25.246V43.712h-25.246V10.986h-27.817v32.726h-22.928l9.367 21.038h13.561v71.763zM47.381 43.712v125.761h27.817V43.713H47.381zM47.381 0v27.583h27.817V0H47.381zM0 169.473V0h27.817v169.473H0z" fill="#F8F8F7"></path>
+                </svg>
+                <div style="font-size:36px; font-weight:700; color:#1827fa; letter-spacing:0.04em;">
+                  The API for Money
+                </div>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px; text-align:center;">
+                <div style="font-size:32px; font-weight:600; color:#888899;">Accounts • Payments • Cards • Stablecoins</div>
+              </div>
+            `;
+          } else if (beat === 38) {
+            inner = `
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <svg style="width:720px; height:auto; margin-bottom:28px;" viewBox="0 0 996 214" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M956.965 43.712L909.512 97.01V0h-27.817v169.473h27.817v-38.102l15.428-16.597 37.869 54.699h33.193l-52.128-75.036 46.752-50.725h-33.661zM867.456 43.01c-17.064.468-28.985 8.884-35.063 23.377V43.712h-27.116v125.761h27.817v-64.751c0-24.778 9.818-34.128 28.986-34.128 3.506 0 6.779.234 11.454.935V43.245c-2.104-.234-4.207-.234-6.078-.234z" fill="#F8F8F7"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M720.301 41.374c17.532 0 32.258 7.714 39.972 21.038v-18.7h28.051v125.761h-28.051V151.24c-7.714 13.558-22.44 21.272-39.972 21.272-30.155 0-54.232-24.311-54.232-65.686 0-41.14 24.077-65.452 54.232-65.452zm7.948 108.463c17.531 0 33.427-12.623 33.427-43.011 0-30.388-15.896-42.777-33.427-42.777-19.168 0-32.493 15.428-32.493 42.777 0 27.583 13.325 43.011 32.493 43.011z" fill="#F8F8F7"></path>
+                  <path d="M565.321 205.974l-27.817 4.406V43.712h27.817v18.7c7.948-13.324 22.44-21.038 40.206-21.038 30.154 0 54.465 24.311 54.465 65.452 0 41.375-24.311 65.686-54.465 65.686-17.766 0-32.258-7.714-40.206-21.272v54.734zm32.024-56.137c19.402 0 32.96-15.428 32.96-43.011 0-27.35-13.558-42.777-32.96-42.777-17.531 0-33.193 12.389-33.193 42.777s15.662 43.011 33.193 43.011z" fill="#F8F8F7"></path>
+                  <path d="M463.588 91.165l19.87 3.74c25.946 4.909 43.712 13.791 43.712 37.167 0 26.181-23.843 40.44-54.933 40.44-32.959 0-53.764-18.935-56.802-43.713h27.583c3.272 14.493 13.09 21.973 29.687 21.973 15.194 0 27.115-5.843 27.115-15.895 0-10.051-9.35-14.727-23.375-17.298l-20.103-3.74c-19.636-3.74-37.635-13.09-37.635-35.297 0-24.077 24.077-37.635 53.063-37.635 27.583 0 49.088 14.026 53.296 39.505h-27.349C494.678 67.555 483.691 62.88 469.9 62.88c-12.389 0-24.077 4.442-24.077 14.493 0 7.714 6.077 11.688 17.765 13.792zM283.411 64.05c-18.934 0-29.453 13.09-29.453 38.569v66.854h-27.817V4.405L253.958 0v61.712c6.545-10.987 19.402-20.337 39.972-20.337 31.09 0 41.843 19.402 41.843 50.024v78.074h-27.817v-70.36c0-18.935-2.338-35.064-24.545-35.064z" fill="#F8F8F7"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M140.563 41.375c17.531 0 31.557 7.714 39.505 21.038v-18.7h27.583v111.735c0 40.673-23.376 57.971-58.673 57.971-31.09 0-50.959-14.493-55.634-39.271h27.817c3.506 10.753 11.22 17.298 27.817 17.298 18.934 0 31.09-8.883 31.09-31.557v-14.493c-7.948 13.558-21.974 21.038-39.505 21.038-29.687 0-54.232-22.207-54.232-62.647 0-39.972 24.545-62.412 54.232-62.412zm7.948 102.619c17.531 0 32.725-10.987 32.725-40.207 0-28.985-15.194-39.738-32.725-39.738-18.701 0-32.493 13.792-32.493 39.738 0 26.415 13.792 40.207 32.493 40.207z" fill="#F8F8F7"></path>
+                  <path d="M359.184 136.513c0 27.35 7.48 32.96 34.128 32.96h25.066l-9.575-21.506h-7.309c-12.389 0-14.493-3.039-14.493-15.661V64.75h25.246V43.712h-25.246V10.986h-27.817v32.726h-22.928l9.367 21.038h13.561v71.763zM47.381 43.712v125.761h27.817V43.713H47.381zM47.381 0v27.583h27.817V0H47.381zM0 169.473V0h27.817v169.473H0z" fill="#F8F8F7"></path>
+                </svg>
+              </div>
+              <div style="padding:44px; background:#0c0d16; border:2px solid #28283a; border-radius:28px; text-align:center;">
+                <div style="display:inline-block; padding:14px 36px; background:#141522; border:2px solid #1827fa; border-radius:999px; font-size:32px; font-weight:900; color:#ffffff;">
+                  @lightspark
+                </div>
+              </div>
+            `;
+          } else { // beat === 39
+            const scale = 0.95 + ease * 0.05;
+            inner = `
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <svg style="width:720px; height:auto; margin-bottom:28px;" viewBox="0 0 996 214" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M956.965 43.712L909.512 97.01V0h-27.817v169.473h27.817v-38.102l15.428-16.597 37.869 54.699h33.193l-52.128-75.036 46.752-50.725h-33.661zM867.456 43.01c-17.064.468-28.985 8.884-35.063 23.377V43.712h-27.116v125.761h27.817v-64.751c0-24.778 9.818-34.128 28.986-34.128 3.506 0 6.779.234 11.454.935V43.245c-2.104-.234-4.207-.234-6.078-.234z" fill="#F8F8F7"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M720.301 41.374c17.532 0 32.258 7.714 39.972 21.038v-18.7h28.051v125.761h-28.051V151.24c-7.714 13.558-22.44 21.272-39.972 21.272-30.155 0-54.232-24.311-54.232-65.686 0-41.14 24.077-65.452 54.232-65.452zm7.948 108.463c17.531 0 33.427-12.623 33.427-43.011 0-30.388-15.896-42.777-33.427-42.777-19.168 0-32.493 15.428-32.493 42.777 0 27.583 13.325 43.011 32.493 43.011z" fill="#F8F8F7"></path>
+                  <path d="M565.321 205.974l-27.817 4.406V43.712h27.817v18.7c7.948-13.324 22.44-21.038 40.206-21.038 30.154 0 54.465 24.311 54.465 65.452 0 41.375-24.311 65.686-54.465 65.686-17.766 0-32.258-7.714-40.206-21.272v54.734zm32.024-56.137c19.402 0 32.96-15.428 32.96-43.011 0-27.35-13.558-42.777-32.96-42.777-17.531 0-33.193 12.389-33.193 42.777s15.662 43.011 33.193 43.011z" fill="#F8F8F7"></path>
+                  <path d="M463.588 91.165l19.87 3.74c25.946 4.909 43.712 13.791 43.712 37.167 0 26.181-23.843 40.44-54.933 40.44-32.959 0-53.764-18.935-56.802-43.713h27.583c3.272 14.493 13.09 21.973 29.687 21.973 15.194 0 27.115-5.843 27.115-15.895 0-10.051-9.35-14.727-23.375-17.298l-20.103-3.74c-19.636-3.74-37.635-13.09-37.635-35.297 0-24.077 24.077-37.635 53.063-37.635 27.583 0 49.088 14.026 53.296 39.505h-27.349C494.678 67.555 483.691 62.88 469.9 62.88c-12.389 0-24.077 4.442-24.077 14.493 0 7.714 6.077 11.688 17.765 13.792zM283.411 64.05c-18.934 0-29.453 13.09-29.453 38.569v66.854h-27.817V4.405L253.958 0v61.712c6.545-10.987 19.402-20.337 39.972-20.337 31.09 0 41.843 19.402 41.843 50.024v78.074h-27.817v-70.36c0-18.935-2.338-35.064-24.545-35.064z" fill="#F8F8F7"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M140.563 41.375c17.531 0 31.557 7.714 39.505 21.038v-18.7h27.583v111.735c0 40.673-23.376 57.971-58.673 57.971-31.09 0-50.959-14.493-55.634-39.271h27.817c3.506 10.753 11.22 17.298 27.817 17.298 18.934 0 31.09-8.883 31.09-31.557v-14.493c-7.948 13.558-21.974 21.038-39.505 21.038-29.687 0-54.232-22.207-54.232-62.647 0-39.972 24.545-62.412 54.232-62.412zm7.948 102.619c17.531 0 32.725-10.987 32.725-40.207 0-28.985-15.194-39.738-32.725-39.738-18.701 0-32.493 13.792-32.493 39.738 0 26.415 13.792 40.207 32.493 40.207z" fill="#F8F8F7"></path>
+                  <path d="M359.184 136.513c0 27.35 7.48 32.96 34.128 32.96h25.066l-9.575-21.506h-7.309c-12.389 0-14.493-3.039-14.493-15.661V64.75h25.246V43.712h-25.246V10.986h-27.817v32.726h-22.928l9.367 21.038h13.561v71.763zM47.381 43.712v125.761h27.817V43.713H47.381zM47.381 0v27.583h27.817V0H47.381zM0 169.473V0h27.817v169.473H0z" fill="#F8F8F7"></path>
+                </svg>
+              </div>
+              <div style="width:100%; background:#1827fa; color:#ffffff; padding:44px 40px; border-radius:28px; text-align:center; transform: scale(${scale});">
+                <div style="font-size:62px; font-weight:900; letter-spacing:-0.03em;">
+                  lightspark.com
+                </div>
+                <div style="font-size:26px; font-weight:800; letter-spacing:0.08em; color:#ffffff; margin-top:10px;">
+                  START BUILDING TODAY →
+                </div>
+              </div>
+            `;
+          }
+          break;
+      }
+
+      slot.innerHTML = inner;
+    };
+
+    window.seek(0);
+  </script>
+</body>
+</html>
