@@ -977,7 +977,7 @@ export const EP6_SEGMENTS: Ep6Segment[] = [
     "start_frame": 24731,
     "clean_text": "Sekarang dari studio ini, kalau diingat lagi hari Minggu itu, dada masih agak sesak... tapi gue bersyukur Raka nggak memilih lari saat tembok pertama keluarga muncul.",
     "visual_type": "studio_nara",
-    "bg_image": "images/sudut-ganjil/studio_wide.jpg",
+    "bg_image": "images/sudut-ganjil/studio_wide_clean.jpg",
     "scene_title": "Refleksi: Harga Diri & Pembuktian",
     "place_label": ""
   },
@@ -992,7 +992,7 @@ export const EP6_SEGMENTS: Ep6Segment[] = [
     "start_frame": 25140,
     "clean_text": "Buat kalian yang sekarang lagi pacaran atau sedang berjuang membangun masa depan, pernah nggak diremehkan keluarga pasangan cuma karena latar belakang ekonomi? Coba ceritain pengalaman kalian di kolom komentar.",
     "visual_type": "studio_raka",
-    "bg_image": "images/sudut-ganjil/studio_wide.jpg",
+    "bg_image": "images/sudut-ganjil/studio_wide_clean.jpg",
     "scene_title": "Refleksi: Harga Diri & Pembuktian",
     "place_label": ""
   },
@@ -1007,7 +1007,7 @@ export const EP6_SEGMENTS: Ep6Segment[] = [
     "start_frame": 25539,
     "clean_text": "Tapi ujian kita ternyata belum selesai sampai di situ. Di semester tengah nanti, saat mulai mengejar magang dan uang tabungan pertama... ada pengkhianatan dan pilihan paling pahit yang hampir memisahkan jalan kita.",
     "visual_type": "studio_nara",
-    "bg_image": "images/sudut-ganjil/studio_wide.jpg",
+    "bg_image": "images/sudut-ganjil/studio_wide_clean.jpg",
     "scene_title": "Refleksi: Harga Diri & Pembuktian",
     "place_label": ""
   },
@@ -1022,7 +1022,7 @@ export const EP6_SEGMENTS: Ep6Segment[] = [
     "start_frame": 26034,
     "clean_text": "Kita simpan ceritanya buat Episode tujuh. Jangan lupa subscribe dan nyalakan loncengnya biar nggak ketinggalan lanjutan kisah Sudut Ganjil berikutnya!",
     "visual_type": "studio_raka",
-    "bg_image": "images/sudut-ganjil/studio_wide.jpg",
+    "bg_image": "images/sudut-ganjil/studio_wide_clean.jpg",
     "scene_title": "Refleksi: Harga Diri & Pembuktian",
     "place_label": ""
   }
