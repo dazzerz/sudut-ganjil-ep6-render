@@ -67,7 +67,8 @@ jobs:
           name: ep6-audio
           path: audio.wav
           retention-days: 3
-    merge:
+
+  merge:
     name: Merge & Publish MP4
     needs: [render-chunks, render-audio]
     runs-on: ubuntu-latest
